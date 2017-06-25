@@ -6,7 +6,7 @@ var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + 
 function setQueryUrl(searchQuery) {
     var startYear = searchQuery.startYear + '0101';
     var endYear = searchQuery.endYear + '0101';
-    url += "&q=" + searchQuery.search + '&begin_date=' + startYear + '&end_date=' + endYear + '&page=1';
+    url += "&sort=newest" + "&q=" + searchQuery.search + '&begin_date=' + startYear + '&end_date=' + endYear + '&page=0';
     console.log(url);
 }
 
@@ -21,9 +21,13 @@ const helpers = {
             var articles = apiData.data.response.docs;
             console.log(`response is: `);
             console.log(articles);
-            return articles;
+            return articles.slice(0, 5);
         });
 
+    },
+
+    saveArticleInDB(article) {
+        console.log('Saving article in db');
     }
 
 }

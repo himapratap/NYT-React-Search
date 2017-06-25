@@ -13,19 +13,29 @@ class Main extends Component {
             <Router>
                 <div className="container">
                     <div className="jumbotron jumbo text-center">
-                        <h1>
-                            <i className="fa fa-newspaper-o" aria-hidden="true"></i>
-                            New York Times Search</h1>
+                        <Link to="/">
 
+                            <h1>
+                                <i className="fa fa-newspaper-o" aria-hidden="true"></i>
+                                New York Times Search</h1>
+                        </Link>
                         <Link to="/saved">
                             <button type="submit" className="btn btn-default ">
                                 <span className="glyphicon glyphicon-save" aria-hidden="true"></span>
                                 Saved Article</button>
                         </Link>
-
+                        <Link to="/search">
+                            <button type="submit" className="btn btn-default ">
+                                <span className="glyphicon glyphicon-save" aria-hidden="true"></span>
+                                Search</button>
+                        </Link>
                     </div>
 
-                    <div className="row"><Search/></div>
+                    <div className="row">
+                        <Route exact path="/" component={Search}></Route>
+
+                        <Route path="/search" component={Search}></Route>
+                    </div>
                     <div className="row">
 
                         <Route path="/saved" component={Saved}></Route>

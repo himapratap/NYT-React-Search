@@ -11,15 +11,22 @@ var config = {
         path: BUILD_DIR,
         filename: 'bundle.js'
     },
-    module : {
-        rules : [
+    module: {
+        rules: [
             {
-                test : /.jsx?/,
+                test: /.jsx?/,
                 exclude: /(node_modules|bower_components)/,
                 include: APP_DIR,
-                loader : 'babel-loader',
+                loader: 'babel-loader',
                 query: {
-                    presets: ['react', ['es2015', { "modules": false  }]]
+                    presets: [
+                        'react',
+                        [
+                            'es2015', {
+                                "modules": false
+                            }
+                        ]
+                    ]
                 }
             }
         ]
@@ -30,7 +37,8 @@ var config = {
     devServer: {
         contentBase: "public",
         hot: true
-    }
+    },
+    devtool: "source-map"
 };
 
 module.exports = config;

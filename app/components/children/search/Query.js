@@ -48,7 +48,6 @@ class Query extends Component {
 
                             <div className="form-group">
                                 <label htmlFor="startYear">Start Year:</label>
-//min="1900" max="2017"
                                 <input type="number" className="form-control"   name="startYear" value={this.state.startYear} onChange={this.handleInputChange}/>
                             </div>
                             <div className="form-group">
