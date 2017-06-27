@@ -30,12 +30,17 @@ const helpers = {
         console.log('Saving article in db');
         console.log(article.title);
 
-        return axios.post('/api/save', {article:article})
+        return axios.post('/api/save', {article: article})
     },
 
     getSavedArticles() {
         console.log('Getting article in db');
         return axios.get('/api');
+    },
+
+    deleteArticle(id) {
+        console.log(`Deleting article in db`);
+        return axios.delete('/api/'+id);
     }
 
 }

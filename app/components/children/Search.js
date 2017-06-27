@@ -17,6 +17,7 @@ class Search extends React.Component {
         this.changeSearchQuery = this.changeSearchQuery.bind(this);
         this.saveArticle = this.saveArticle.bind(this);
         this.removeArticle = this.removeArticle.bind(this);
+        console.log(`constructor called`);
     }
 
     changeSearchQuery(searchQuery) {
@@ -28,9 +29,15 @@ class Search extends React.Component {
     //saves the article in db
     saveArticle(event) {
         var articleIndex = event.target.dataset.articleIndex;
-        let {headline:{main:title}, pub_date:date, web_url:url} = this.state.results[articleIndex];
+        let {
+            headline: {
+                main: title
+            },
+            pub_date: date,
+            web_url: url
+        } = this.state.results[articleIndex];
         var article = {
-            title ,
+            title,
             date,
             url
         }
@@ -38,6 +45,7 @@ class Search extends React.Component {
         helpers.saveArticleInDB(article);
         console.log(`article : ${article}`);
         this.removeArticle(articleIndex);
+        //this.props.updateSavedArticles(article);
     }
 
     removeArticle(articleIndex) {
@@ -46,9 +54,11 @@ class Search extends React.Component {
         console.log(`Removed the article from results in state : ${this.state.results.length}`);
     }
 
+
     // componentDidUpdate is a lifecycle method that will get run every time the component updates it's
     // props or state
     componentDidUpdate(prevProps, prevState) {
+        console.log(`updating components`);
         if (prevState.searchQuery != this.state.searchQuery) {
             console.log("COmponent updated");
             helpers.searchArticles(this.state.searchQuery).then(function(results) {
@@ -57,6 +67,12 @@ class Search extends React.Component {
 
             }.bind(this));
         }
+
+        // if (this.state.results == null && prevState.results != null) {
+        //     console.log(`prev results not null`);
+        //     this.setState({results: prevState.results})
+        //
+        // }
     }
 
     render() {

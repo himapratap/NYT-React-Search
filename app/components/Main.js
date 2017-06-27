@@ -12,7 +12,8 @@ class Main extends Component {
         this.state = {
             savedArticles: ''
         }
-
+        this.updateSavedArticles = this.updateSavedArticles.bind(this);
+        this.deleteArticle = this.deleteArticle.bind(this);
     }
     // The moment the page renders get the History
     componentDidMount() {
@@ -25,6 +26,33 @@ class Main extends Component {
                 this.setState({savedArticles: response.data});
             }
         }.bind(this));
+    }
+
+    updateSavedArticles(newArticle) {
+        console.log('Updating saved articles array in state');
+        var savedArticles = this.state.savedArticles.slice();
+        savedArticles.push(newArticle)
+
+        this.setState({savedArticles: savedArticles});
+        console.log('Updated saved articles array in state');
+
+    }
+
+    deleteArticle(index) {
+        console.log(`Deleting item from the saved list ${index}`);
+        var array = this.state.savedArticles;
+        var itemToBeDeleted  =array.splice(index, 1);
+
+        helpers.deleteArticle(itemToBeDeleted[0]._id).then(() => {
+            console.log(`Deleted item from the saved with id `);
+            console.log('SLiced array');
+             console.log(array);
+
+            this.setState({savedArticles: array});
+           console.log('AFter slice on delete');
+            console.log(this.state.savedArticles);
+        });
+
     }
 
     render() {
@@ -51,14 +79,12 @@ class Main extends Component {
                     </div>
 
                     <div className="row">
-                        <Route exact path="/" component={Search}></Route>
+                        <Route exact path="/" component={() => <Search updateSavedArticles={this.updateSavedArticles}/>}></Route>
 
-                        <Route path="/search" component={Search}></Route>
+                        <Route path="/search" component={() => <Search updateSavedArticles={this.updateSavedArticles}/>}></Route>
                     </div>
                     <div className="row">
-                        <Route path="/saved" component={() => <Saved savedArticles={this.state.savedArticles}/>}></Route>
-                        {/* <Route path="/saved" component={Saved} saved={this.state.savedArticles}></Route> */}
-
+                        <Route path="/saved" component={() => <Saved savedArticles={this.state.savedArticles} deleteArticle={this.deleteArticle}/>}></Route>
                     </div>
                 </div>
             </Router>

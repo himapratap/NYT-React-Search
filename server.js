@@ -85,6 +85,24 @@ app.post("/api/save", function(req, res) {
     });
 });
 
+// This is the route we will send POST requests to save each search.
+app.delete("/api/:id", function(req, res) {
+    var id = req.params.id ;
+    console.log("Inside delete request api: " + id);
+
+     // Here we'll save the location based on the JSON input.
+    // We'll use Date.now() to always get the current date time
+   Article.find({_id :id}).remove().exec(function(err,article) {
+       if (err) {
+           console.log(err);
+       } else {
+           console.log(`Deleted the article`);
+           res.send("Deleted Article");
+       }
+   });
+
+});
+
 // -------------------------------------------------
 
 // Listener

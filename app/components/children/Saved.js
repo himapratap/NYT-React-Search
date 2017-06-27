@@ -5,25 +5,6 @@ class Saved extends Component {
 
     constructor(props) {
         super(props);
-        // this.getData = this.getData.bind(this);
-        // this.state = {
-        //     savedArticles: ""
-        //
-        // }
-        // this.getData();
-
-    }
-
-    getData() {
-        // Get the latest history.
-        console.log('getting saved articles');
-        helpers.getSavedArticles().then(function(response) {
-            console.log(response);
-            if (response !== this.state.savedArticles) {
-                console.log("savedArticles", response.data);
-                this.setState({savedArticles: response.data});
-            }
-        }.bind(this));
     }
 
     render() {
@@ -46,7 +27,7 @@ class Saved extends Component {
                       </h4>
                       <hr/>
                       <a className="btn btn-default button" href={element.url} target="_blank">View Article</a>
-                      <button className="btn btn-default button" data-article-index={x}>Delete</button>
+                      <button className="btn btn-default button" data-article-index={x} onClick={this.props.deleteArticle.bind(this)}>Delete</button>
 
                   </div>
               )
