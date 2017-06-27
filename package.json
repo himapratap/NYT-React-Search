@@ -4,10 +4,11 @@
   "description": "",
   "main": "public/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --progress --inline --hot",
-    "dev": "webpack -w & node server"
-   },
+      "start": "node server.js",
+      "prod": "node server.js",
+      "dev": "nodemon server.js & webpack -w",
+      "build-dist": "webpack --progress"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
